@@ -382,6 +382,7 @@ html, body {
   margin-top: 5px;
 }
 
+
 /* =================== Language Toggle (Fixed) =================== */
 .lang-btn {
   background: none;
@@ -439,5 +440,110 @@ html, body {
 
 #modalDesc strong {
     color: #000000; /* Description headings (Description, Ingredients) green color-la irukka */
+}
+@media (max-width: 767px) {
+    /* 1. "Our Products" and "Contact Us" separate lines-ku kondu vara */
+    .product-header { 
+        display: flex;
+        flex-direction: column; /* Column-ah maathuna oru line-la varum */
+        align-items: flex-start; /* Left side align panna */
+        gap: 10px;
+        padding: 0 15px;
+    }
+
+    #pageTitle {
+        font-size: 1.8rem !important; /* Title-ai nalla perusaakki orae line-la kaatta */
+        width: 100%;
+        display: block;
+    }
+
+    /* "Contact Us" link-ai title-ku keela oru neat button maari maathalaam */
+    .contact-link {
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #666;
+    }
+}
+@media (min-width: 768px) {
+    .modal-body {
+        display: flex !important;
+        flex-direction: row !important;
+        gap: 30px !important;
+        align-items: flex-start !important;
+    }
+
+    .modal-img-container {
+        flex: 0 0 40% !important; /* Image left side 40% */
+    }
+
+    /* Right side container - Vertical Stack */
+    .modal-info-container {
+        flex: 1 !important;
+        display: flex !important;
+        flex-direction: column !important; /* Items-ai vertical-ah adukkum */
+        justify-content: flex-start !important;
+    }
+
+    #modalDesc {
+        width: 100% !important;
+        text-align: justify;
+        line-height: 1.6;
+        display: block !important;
+    }
+
+    /* Instagram Button - Strict alignment below text */
+    #instaBtn {
+        display: inline-flex !important;
+        width: fit-content !important; /* Full width aagaama irukka */
+        margin-top: 15px !important; /* Text mudinja udanae chinna gap */
+        align-self: flex-start !important;
+    }
+}
+/* Desktop-la ellathaiyum fix panna */
+@media (min-width: 768px) {
+    /* 1. Banner - Mobile look maadhiriye center-la vara */
+    .banner {
+        width: 100% !important;
+        max-width: 800px !important; /* Banner romba agalam aagaama thadukkum */
+        height: auto !important; 
+        margin: 0 auto 20px auto !important; /* Center alignment */
+        display: block !important;
+        object-fit: contain !important;
+    }
+
+    /* 2. Modal Body - Layout structure */
+    .modal-body {
+        display: flex !important;
+        flex-direction: row !important;
+        gap: 30px !important;
+        align-items: flex-start !important;
+    }
+
+    /* Left Side: Image */
+    .modal-img-container {
+        flex: 0 0 350px !important; /* Fixed width for image side */
+    }
+
+    /* Right Side: Info */
+    .modal-info-container {
+        flex: 1 !important;
+        display: block !important; /* Flex-ai remove panna button side-la pogaadhu */
+    }
+
+    /* 3. Modal Text & Button - Vertical Alignment */
+    #modalDesc {
+        display: block !important;
+        width: 100% !important;
+        margin-bottom: 20px !important; /* Text mudinja udanae space */
+        text-align: left;
+    }
+
+    #instaBtn {
+        display: block !important; /* Button-ai next line-ku force pannum */
+        width: fit-content !important;
+        margin-top: 10px !important;
+        float: none !important; /* Side-la poga vidaadhu */
+    }
 }
 /* ... Keep rest of the Modal and Video styles ... */
