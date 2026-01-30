@@ -1,0 +1,325 @@
+/* =================== Root Variables =================== */
+:root {
+  --primary-green: #2f7a3e;
+  --accent-brown: #6d3402;
+  --badge-brown: #8b4513;
+  --text-dark: #111;
+  --text-light: #fff;
+  --card-shadow: rgba(0, 0, 0, 0.2);
+  --card-hover-shadow: rgba(0, 0, 0, 0.4);
+  --transition-speed: 0.3s;
+  --video-glow: rgba(132, 79, 5, 0.35);
+  --button-light: #FFD8A8;
+  --product-name-color: #001F54;
+  --insta-pink: #E1306C;
+}
+
+/* =================== Base Styles =================== */
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Inter', system-ui, sans-serif;
+  color: var(--text-dark);
+  overflow-x: hidden;
+  background: linear-gradient(
+    rgba(154, 151, 151, 0.85),
+    rgba(36, 81, 6, 0.15)
+  ), url("images/card-bgs.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+/* Fix for Inline Styles Error (Logo) */
+.brand-logo-main {
+  height: 150px;
+}
+
+.brand {
+  font-weight: 700;
+  color: rgb(3, 62, 22);
+  font-size: 2rem;
+}
+
+.subtitle {
+  color: #000;
+}
+
+/* =================== Banner =================== */
+.banner {
+  width: 100%;
+  max-height: 460px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 18px;
+}
+
+/* =================== Buttons =================== */
+.btn {
+  border-radius: 25px;
+  padding: 0.5rem 1.3rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  transition: all var(--transition-speed) ease;
+  color: var(--text-dark);
+  border: none;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px var(--card-hover-shadow);
+  background: #025710;
+  color: white;
+}
+
+/* Instagram Pink Button */
+#instaBtn {
+  background: var(--insta-pink);
+  color: white !important;
+  border: 1px solid rgba(0,0,0,0.08);
+  font-weight: 600;
+  padding: 12px 20px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(225, 48, 108, 0.3);
+  width: 100%;
+  margin-top: 15px;
+}
+
+#instaBtn::before {
+  content: "▶";
+  font-size: 0.9rem;
+}
+
+#instaBtn:hover {
+  background: #c12056;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(225, 48, 108, 0.4);
+}
+
+/* =================== Product Grid & Cards =================== */
+#productGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(to bottom right, #f0f9eb, #e0f2d9);
+  border-radius: 18px;
+  padding: 12px;
+  cursor: pointer;
+  transition: transform var(--transition-speed) cubic-bezier(.22,1,.36,1),
+              box-shadow var(--transition-speed),
+              filter var(--transition-speed);
+  box-shadow: 0 8px 20px var(--card-shadow);
+  min-height: 1px; /* Firefox Fix */
+}
+
+.product-card:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 18px 35px var(--card-hover-shadow);
+  filter: saturate(1.1) contrast(1.04);
+}
+
+.product-img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  background: #fff;
+  border-radius: 14px;
+  margin-bottom: 10px;
+  transition: transform var(--transition-speed);
+}
+
+.product-card .fw-bold {
+  font-size: 1rem;
+  color: var(--product-name-color);
+}
+
+.price {
+  display: inline-block;
+  background: var(--badge-brown);
+  color: #fff;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 18px;
+  margin-top: 6px;
+  font-size: 0.85rem;
+}
+
+/* =================== Modal Luxury Design =================== */
+.modal-content {
+  position: relative;
+  border-radius: 25px;
+  border: none;
+  background: rgba(204, 233, 208, 0.92);
+  -webkit-backdrop-filter: blur(10px); /* Safari Fix First */
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+}
+
+.modal-content::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 25px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.55), rgba(255,255,255,0.05));
+  pointer-events: none;
+  z-index: 0;
+}
+
+.modal-header, .modal-body {
+  position: relative;
+  z-index: 1;
+}
+
+#modalTitle {
+  background: linear-gradient(45deg, #2d5a27, #051f02);
+  -webkit-background-clip: text;
+  background-clip: text; /* Compatibility Fix */
+  -webkit-text-fill-color: transparent;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+}
+
+/* Fix for inline flex styles in Modal Body */
+.modal-img-container {
+  flex: 0 0 320px;
+}
+
+.modal-info-container {
+  flex: 1;
+}
+
+#modalImage {
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  background: linear-gradient(135deg, #ffffff, #f7f7f7);
+  border: 1px solid rgba(0,0,0,0.06);
+}
+
+/* Modal Entrance Animation */
+.modal.fade .modal-dialog {
+  transform: translateY(16px) scale(0.98);
+  opacity: 0;
+  transition: all 0.35s cubic-bezier(.22,1,.36,1);
+}
+
+.modal.show .modal-dialog {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+/* =================== Video Section =================== */
+.video-wrap {
+  position: relative;
+  width: 360px;
+  max-width: 90vw;
+  margin: 20px auto;
+  border-radius: 18px;
+  background: #000;
+  box-shadow: 0 10px 24px rgba(0,0,0,.25);
+  overflow: hidden;
+}
+
+.brand-video {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 18px;
+}
+
+/* =================== Responsive Queries =================== */
+@media (min-width: 768px) {
+  .modal-body {
+    flex-direction: row !important;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 800px) {
+  .modal-body {
+    text-align: center;
+  }
+  .modal-img-container {
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: 200px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 576px) {
+  .product-img {
+    max-height: 240px;
+  }
+  .modal-dialog {
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    min-height: calc(100% - 20px);
+  }
+  #modalTitle {
+    font-size: 1.2rem;
+  }
+}
+#logoText {
+  width: 48px;  /* Konjam size increase panniruken */
+  height: 48px;
+  background: rgb(1,114,37);
+  border-radius: 16px; /* Ithu thaan antha Curved Square look */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 800;
+  font-size: 1.2rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15); /* Chinna shadow for depth */
+  border: 2px solid rgba(255, 255, 255, 0.2); /* Subtle border for luxury look */
+}
+/* Footer-la irukkara Instagram link color */
+footer a[href*="instagram"] {
+    color: #E1306C !important; /* Instagram Pink */
+    font-weight: 700;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+footer a[href*="instagram"]:hover {
+    color: #fdf497 !important; /* Yellowish gold on hover */
+}
+/* Phone and Email links look */
+.contact-link {
+    text-decoration: none;
+    color: inherit; /* Normal text color-laeye irukkum */
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.contact-link:hover {
+    color: var(--primary-green); /* Hover panna unga brand green varum */
+    text-decoration: underline;
+}
+
+/* Instagram ID specific color (Pinkish Gradient Look) */
+.insta-text-link {
+    font-weight: 700;
+    text-decoration: none;
+    background: -webkit-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: opacity 0.3s ease;
+}
+
+.insta-text-link:hover {
+    opacity: 0.8;
+}
