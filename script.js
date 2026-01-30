@@ -185,71 +185,129 @@ const products = [
 }
 ];
 
-const grid=document.getElementById('productGrid');
-const modal=new bootstrap.Modal(document.getElementById('productModal'));
-const modalTitle=document.getElementById('modalTitle');
-const modalImage=document.getElementById('modalImage');
-const modalPrice=document.getElementById('modalPrice');
-const modalDesc=document.getElementById('modalDesc');
-const instaBtn=document.getElementById('instaBtn');
-let lang='en';
-let currentProduct=null;
+// 2. Variables
+const grid = document.getElementById('productGrid');
+const modalElement = document.getElementById('productModal');
+const modal = new bootstrap.Modal(modalElement);
+const modalTitle = document.getElementById('modalTitle');
+const modalImage = document.getElementById('modalImage');
+const modalPrice = document.getElementById('modalPrice');
+const modalDesc = document.getElementById('modalDesc');
+const instaBtn = document.getElementById('instaBtn');
+const langToggleBtn = document.getElementById('langToggle');
 
-products.forEach(p=>{
-const card = document.createElement('div');
-card.className = 'product-card';
-card.innerHTML = `
-  <img class="product-img" src="${p.img}">
-  <div class="mt-2">
-    <div class="fw-bold">${p.name}</div>
-    <div class="small text-muted">${p.ta}</div>
-    <div class="price mt-1">${p.price}</div>
-  </div>`;
-card.onclick = () => openProduct(p);
-grid.appendChild(card);
+let lang = 'en';
+let currentProduct = null;
 
-});
+// 3. Render Function (Idhu thaan cards-ai refresh pannum)
+function renderProducts() {
+    if (!grid) return;
+    grid.innerHTML = ''; // Pazhaya cards-ai clear panna
 
-function openProduct(p){
-  currentProduct=p;
-  modalTitle.textContent=lang==='ta'?p.ta:p.name;
-  modalImage.src=p.img;
-  modalPrice.textContent=p.price;
-  modalDesc.innerHTML=`<p>${lang==='ta'?p.descTa:p.descEn}</p>`;
-  instaBtn.href=p.insta;
-  instaBtn.style.display=p.insta?'inline-block':'none';
-  modal.show();
-  setTimeout(()=>modalDesc.classList.add('show'),50);
+    products.forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        
+        // Language choice
+        const nameToShow = (lang === 'ta') ? p.ta : p.name;
+        const subName = (lang === 'ta') ? p.name : p.ta;
+
+        card.innerHTML = `
+            <img class="product-img" src="${p.img}" alt="${p.name}">
+            <div class="mt-2 text-center">
+                <div class="fw-bold">${nameToShow}</div>
+                <div class="small text-muted" style="font-size: 0.8rem ;color:white;">${subName}</div>
+                <div class="price mt-1" style="color: white; font-weight: bold;">${p.price}</div>
+            </div>`;
+        card.onclick = () => openProduct(p);
+        grid.appendChild(card);
+    });
 }
 
-document.getElementById('langToggle').onclick=()=>{
-  lang=lang==='en'?'ta':'en';
-  document.getElementById('pageTitle').textContent=lang==='ta'?'எங்கள் பொருட்கள்':'Our Products';
-};
+function openProduct(p) {
+    currentProduct = p;
+    
+    // 1. Basic Content
+    modalTitle.textContent = (lang === 'ta') ? p.ta : p.name;
+    modalImage.src = p.img;
+    modalPrice.textContent = p.price;
+    
+    // 2. Updated Toggle Button (Green theme, No Black)
+    const toggleBtnHTML = `
+        <div class="mb-3">
+            <button class="btn btn-sm" 
+                    style="background-color: #2f7a3e; color: white; border-radius: 20px; padding: 6px 20px; font-weight: bold; border: none; font-size: 13px;" 
+                    onclick="toggleModalLang()">
+                ${lang === 'en' ? 'தமிழ்' : 'English'}
+            </button>
+        </div>
+    `;
 
-document.getElementById('modalLangToggle').onclick = () => {
-  lang = lang === 'en' ? 'ta' : 'en';
-  if (currentProduct) {
-    modalTitle.textContent = lang === 'ta' ? currentProduct.ta : currentProduct.name;
-    modalDesc.innerHTML = `<p>${lang === 'ta' ? currentProduct.descTa : currentProduct.descEn}</p>`;
-  }
-};
-
-// Video toggle
-const videoWrap=document.querySelector('.video-wrap');
-const video=videoWrap.querySelector('video');
-
-function updateSoundText(){
-  if(video.muted){
-    videoWrap.style.setProperty('--sound-text','"🔇 sound off"');
-    videoWrap.classList.remove('sound-on');
-  }else{
-    videoWrap.style.setProperty('--sound-text','"🔊 sound on"');
-    videoWrap.classList.add('sound-on');
-  }
+    // 3. Set Modal Body
+    modalDesc.innerHTML = toggleBtnHTML + `<div class="mt-2">${lang === 'ta' ? p.descTa : p.descEn}</div>`;
+    
+    // 4. Instagram Button
+    if (instaBtn) {
+        instaBtn.href = p.insta;
+        instaBtn.style.display = p.insta ? 'inline-block' : 'none';
+    }
+    
+    modal.show();
+    setTimeout(() => modalDesc.classList.add('show'), 50);
 }
-videoWrap.addEventListener('click',()=>{
-  video.muted=!video.muted;
-  updateSoundText();
+
+// 5. Toggle Function specifically for that button
+window.toggleModalLang = function() {
+    // Language-ai switch pannuvom
+    lang = (lang === 'en') ? 'ta' : 'en';
+    
+    // UI-ai refresh pannuvom
+    if (currentProduct) {
+        openProduct(currentProduct); 
+    }
+    
+    // Background title refresh
+    const pageTitle = document.getElementById('pageTitle');
+    if (pageTitle) pageTitle.textContent = (lang === 'ta') ? 'எங்கள் பொருட்கள்' : 'Our Products';
+
+    renderProducts(); // Refresh background cards
+};
+
+// Modal-kulla irukka language toggle (neenga use panna)
+const modalLangToggle = document.getElementById('modalLangToggle');
+if (modalLangToggle) {
+    modalLangToggle.onclick = () => {
+        lang = (lang === 'en') ? 'ta' : 'en';
+        if (currentProduct) {
+            modalTitle.textContent = (lang === 'ta') ? currentProduct.ta : currentProduct.name;
+            modalDesc.innerHTML = `<p>${(lang === 'ta') ? currentProduct.descTa : currentProduct.descEn}</p>`;
+        }
+        renderProducts(); // Sync back the main grid
+        if (langToggleBtn) langToggleBtn.textContent = (lang === 'en') ? 'தமிழ்' : 'English';
+    };
+}
+
+// 6. Video Sound Toggle Logic
+const videoWrap = document.querySelector('.video-wrap');
+if (videoWrap) {
+    const video = videoWrap.querySelector('video');
+    function updateSoundText() {
+        if (video.muted) {
+            videoWrap.style.setProperty('--sound-text', '"🔇 sound off"');
+            videoWrap.classList.remove('sound-on');
+        } else {
+            videoWrap.style.setProperty('--sound-text', '"🔊 sound on"');
+            videoWrap.classList.add('sound-on');
+        }
+    }
+    videoWrap.addEventListener('click', () => {
+        video.muted = !video.muted;
+        updateSoundText();
+    });
+    updateSoundText();
+}
+
+// Initial Load
+document.addEventListener('DOMContentLoaded', () => {
+    renderProducts();
 });
-updateSoundText();

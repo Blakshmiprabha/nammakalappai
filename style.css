@@ -102,14 +102,6 @@ html, body {
   box-shadow: 0 6px 15px rgba(225, 48, 108, 0.4);
 }
 
-/* =================== Product Grid & Cards =================== */
-#productGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 16px;
-  margin-top: 20px;
-}
-
 .product-card {
   display: flex;
   flex-direction: column;
@@ -285,17 +277,6 @@ html, body {
   box-shadow: 0 4px 10px rgba(0,0,0,0.15); /* Chinna shadow for depth */
   border: 2px solid rgba(255, 255, 255, 0.2); /* Subtle border for luxury look */
 }
-/* Footer-la irukkara Instagram link color */
-footer a[href*="instagram"] {
-    color: #E1306C !important; /* Instagram Pink */
-    font-weight: 700;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-footer a[href*="instagram"]:hover {
-    color: #fdf497 !important; /* Yellowish gold on hover */
-}
 /* Phone and Email links look */
 .contact-link {
     text-decoration: none;
@@ -323,3 +304,140 @@ footer a[href*="instagram"]:hover {
 .insta-text-link:hover {
     opacity: 0.8;
 }
+/* ... Keep Root and Base Styles as they are ... */
+
+/* =================== Product Grid & Cards (Fixed) =================== */
+#productGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Mobile-la rendu card side-by-side */
+    gap: 12px; /* Gap-ai konjam kuraichaa image innum perusa theriyum */
+    padding: 10px;
+}
+
+.product-card {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #f0f0f0;
+}
+
+.product-img-wrapper {
+    width: 100%;
+    /* Image innum height-ah theriya 4:5 ratio (Portrait look) */
+    aspect-ratio: 4 / 5; 
+    overflow: hidden;
+    background: #f9f9f9;
+}
+
+.product-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Image cut aagama, card-ai nalla fill pannum */
+    display: block;
+}
+
+.product-info-area {
+    padding: 10px 5px;
+    text-align: center;
+    background: #fff;
+}
+
+.product-title-main {
+    font-size: 0.9rem; /* Text size-ai balance panni image-ku importance tharuvom */
+    font-weight: 700;
+    color: #333;
+    min-height: 40px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.2;
+}
+
+.product-price-main {
+    color: #2f7a3e;
+    font-weight: 800;
+    font-size: 1rem;
+    margin-top: 4px;
+}
+
+/* Desktop-la 4 or 5 cards kaatalaam */
+@media (min-width: 768px) {
+    #productGrid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+    }
+}
+
+.price {
+  background: var(--badge-brown);
+  color: #fff;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  width: fit-content;
+  margin-top: 5px;
+}
+
+/* =================== Language Toggle (Fixed) =================== */
+.lang-btn {
+  background: none;
+  border: none;
+  color: #666; /* Unselected color */
+  font-weight: 600;
+  cursor: pointer;
+  padding: 5px 10px;
+  transition: all 0.3s ease;
+}
+
+.lang-btn.active {
+  color: var(--primary-green) !important; /* Green color only when clicked */
+  text-decoration: underline;
+  font-weight: 800;
+  transform: scale(1.1);
+}
+.lang-toggle {
+  cursor: pointer;
+  color: #666;
+  font-weight: 700;
+  transition: all 0.2s ease;
+  padding: 5px 10px;
+  border: 1px solid transparent;
+}
+
+/* Click pannum pothu temporary-ah green aaga */
+.lang-toggle.clicked {
+  color: var(--primary-green) !important;
+  transform: scale(1.1);
+}
+
+/* =================== Modal Bold Text (Fixed) =================== */
+#modalDescription, #modalIngredients, 
+.modal-info-container b, 
+.modal-info-container strong {
+  font-weight: 800 !important; /* Forces bold on mobile */
+  color: #000 !important;
+  display: inline-block;
+  margin-bottom: 5px;
+}
+.modal-lang-toggle {
+    display: flex;
+    gap: 10px;
+    border-bottom: 1px solid #eae7e7;
+    padding-bottom: 10px;
+}
+
+.modal-lang-toggle .btn {
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 20px;
+    padding: 4px 12px;
+}
+
+#modalDesc strong {
+    color: #000000; /* Description headings (Description, Ingredients) green color-la irukka */
+}
+/* ... Keep rest of the Modal and Video styles ... */
