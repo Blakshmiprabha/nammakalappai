@@ -441,65 +441,6 @@ html, body {
 #modalDesc strong {
     color: #000000; /* Description headings (Description, Ingredients) green color-la irukka */
 }
-@media (max-width: 767px) {
-    /* 1. "Our Products" and "Contact Us" separate lines-ku kondu vara */
-    .product-header { 
-        display: flex;
-        flex-direction: column; /* Column-ah maathuna oru line-la varum */
-        align-items: flex-start; /* Left side align panna */
-        gap: 10px;
-        padding: 0 15px;
-    }
-
-    #pageTitle {
-        font-size: 1.8rem !important; /* Title-ai nalla perusaakki orae line-la kaatta */
-        width: 100%;
-        display: block;
-    }
-
-    /* "Contact Us" link-ai title-ku keela oru neat button maari maathalaam */
-    .contact-link {
-        font-size: 0.9rem;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        color: #666;
-    }
-}
-@media (min-width: 768px) {
-    .modal-body {
-        display: flex !important;
-        flex-direction: row !important;
-        gap: 30px !important;
-        align-items: flex-start !important;
-    }
-
-    .modal-img-container {
-        flex: 0 0 40% !important; /* Image left side 40% */
-    }
-
-    /* Right side container - Vertical Stack */
-    .modal-info-container {
-        flex: 1 !important;
-        display: flex !important;
-        flex-direction: column !important; /* Items-ai vertical-ah adukkum */
-        justify-content: flex-start !important;
-    }
-
-    #modalDesc {
-        width: 100% !important;
-        text-align: justify;
-        line-height: 1.6;
-        display: block !important;
-    }
-
-    /* Instagram Button - Strict alignment below text */
-    #instaBtn {
-        display: inline-flex !important;
-        width: fit-content !important; /* Full width aagaama irukka */
-        margin-top: 15px !important; /* Text mudinja udanae chinna gap */
-        align-self: flex-start !important;
-    }
-}
 /* Desktop-la ellathaiyum fix panna */
 @media (min-width: 768px) {
     /* 1. Banner - Mobile look maadhiriye center-la vara */
@@ -546,4 +487,44 @@ html, body {
         float: none !important; /* Side-la poga vidaadhu */
     }
 }
-/* ... Keep rest of the Modal and Video styles ... */
+
+/* 2. Mobile Modal: Gaps-ai kuraikka and Boldness-ai adhigam aakka */
+@media (max-width: 767px) {
+    /* Header (Our Products & Contact) alignment fix */
+    .row.mb-3 {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        gap: 10px;
+    }
+    .col.text-end { text-align: center !important; width: 100%; }
+
+    /* Modal padding and gap reduction */
+    .modal-content { padding: 12px !important; }
+    .modal-body { 
+        gap: 8px !important; 
+        padding: 5px !important;
+        flex-direction: column !important;
+    }
+    
+    #modalImage { 
+        max-height: 275px !important; 
+        margin-bottom: 5px !important; 
+    }
+
+    /* Bold Text for Mobile Description */
+    #modalDesc strong, #modalDesc b {
+        font-weight: 900 !important; /* Super Bold */
+        color: #000 !important;
+        display: inline-block !important;
+        margin-top: 10px !important;
+        font-size: 1rem !important;
+    }
+
+    #modalDesc {
+        font-size: 0.95rem !important;
+        line-height: 1.4 !important;
+        text-align: left !important;
+    }
+}
